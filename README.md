@@ -1,5 +1,5 @@
 # Mercibot
-##Administrative Economy Discord Bot
+## Administrative Economy Discord Bot
 
 [comment]: <> ([![CodeFactor]&#40;https://www.codefactor.io/repository/github/xcrashsystemx/otaku-treffpunkt-re/badge?s=98b0ae6f2011ec863845f5219dde0daa9ccfb71b&#41;]&#40;https://www.codefactor.io/repository/github/xcrashsystemx/otaku-treffpunkt-re&#41;)
 
