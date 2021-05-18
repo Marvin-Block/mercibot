@@ -1,0 +1,35 @@
+
+{
+  "development": {
+    "username": "username",
+    "password": "password",
+    "database": "database",
+    "host": "host",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "username",
+    "password": "password",
+    "database": "database",
+    "host": "host",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "username",
+    "password": "password",
+    "database": "database",
+    "host": "host",
+    "dialect": "mysql"
+  },
+  "locale": "de_DE",
+  "discord": {
+    "prefix": "!",
+    "token": "TOKEN HERE"
+  },
+  "database": {
+    "host": "HOST ADDRESS",
+    "user": "USERNAME",
+    "password": "PASSWORD",
+    "database": "dev"
+  }
+}
