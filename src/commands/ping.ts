@@ -1,11 +1,9 @@
-export class Ping {
-  readonly name = 'ping';
-  readonly description = 'Ping!';
-  readonly usage = '<ping>';
-  readonly guildOnly = false;
-  readonly adminOnly = false;
-  readonly cooldown = 5;
-  execute(message: any) {
-    message.channel.send('Pong.');
-  }
+export const name:string = 'ping'
+export const description:string = 'Ping!'
+export const usage:string = '<ping>';
+export const guildOnly:boolean = false;
+export const adminOnly:boolean = false;
+export const cooldown:number = 5;
+export function execute(message:any){
+  message.channel.send('Pong!');
 }
