@@ -17,9 +17,6 @@ export class CommandEnabledChannel {
   @Column({ length: 18, unique:true })
   channelId: string;
 
-  @Column()
-  requiredLevel: number;
-
   @CreateDateColumn()
   createdAt: Date;
 

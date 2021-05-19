@@ -1,4 +1,4 @@
-export class Ping {
+export class Test {
   readonly name = 'ping';
   readonly description = 'Ping!';
   readonly usage = '<ping>';

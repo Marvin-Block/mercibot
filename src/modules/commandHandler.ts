@@ -13,12 +13,17 @@ export function init(client: any) {
   client.commands = new discord.Collection();
 
   // read commands from directory
-  const commandFiles = fs.readdirSync('../commands').filter((file) => file.endsWith('.ts'));
+  const commandFiles = fs.readdirSync('./src/commands').filter((file) => file.endsWith('.ts'));
 
   // iterate files and add to collection
   for (const file of commandFiles) {
-    const command: any[any] = import(`../commands/${file}`);
-    client.commands.set(command.name, command);
+    import(`../commands/${file}`).then((command) => {
+      // todo: fix command handler
+      const ping = command.Ping
+      console.log();
+      client.commands.set(command.name, command);
+      console.log('Imported command: ' + command.name);
+    });
   }
 }
 
@@ -26,20 +31,30 @@ export async function handle(message: any, client: any) {
   const prefix = config.discord.prefix;
   const messageOriginal = message;
 
+  console.log('passed bot ignore');
   // react only to prefix messages. Ignore bots
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
+  console.log('passed prefix');
   const args = message.content.slice(prefix.length).trim().split(/ +/);
   const commandName = args.shift().toLowerCase();
 
   // check for command alias
   const command = client.commands.get(commandName) || client.commands.find((cmd: any) => (cmd.aliases ? cmd.aliases.includes(commandName) : false));
+
+  console.log(client.commands);
+  client.commands.forEach((cmd: any) => {
+    console.log(cmd);
+  });
+
   if (!command) return;
+  console.log('passed alias check');
 
   // check for guildOnly
   if (command.guildOnly && message.channel.type !== 'text') {
     return message.reply(translator.t('err_guildOnly'));
   }
+  console.log('passed guildOnly');
 
   // get adminRoles from database
   const roleEntries: any[any] = await adminRole.getRoles();
@@ -62,6 +77,8 @@ export async function handle(message: any, client: any) {
     return message.reply(translator.t('err_adminOnly'));
   }
 
+  console.log('passed permissions');
+
   // get channels from database
   const enabledEntries: any[any] = await commandEnabledChannel.getChannels();
   const channels: string[] = [];
@@ -70,7 +87,9 @@ export async function handle(message: any, client: any) {
   });
 
   // check for channels that have commands enabled
-  if (!channels.includes(message.cannel.id)) return;
+  if (!channels.includes(message.channel.id)) return;
+
+  console.log('passed channels');
 
   // check for arguments
   if (command.args && !args.length) {
@@ -102,13 +121,12 @@ export async function handle(message: any, client: any) {
   }
   // set cooldown and delete after time passed
   timestamps.set(message.author.id, now);
-  setTimeout(()=> timestamps.delete(message.author.id), cooldownAmount);
+  setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
   try {
     command.execute(message, args);
   } catch (error) {
     console.error(error);
     message.reply(translator.t('error'));
-  };
-
+  }
 }
