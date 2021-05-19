@@ -1,5 +1,5 @@
 {
-  "welcome-msg": "Willkommen, ",
+  "welcome_msg": "Willkommen, ",
   "welcome": "Willkommen !",
   "lvlup": "Level Up!",
   "counterChannelText": "%s - \uD835\uDD44\uD835\uDD56\uD835\uDD5E\uD835\uDD53\uD835\uDD56\uD835\uDD63\uD835\uDD64",
@@ -28,7 +28,7 @@
   "title_stats": "Statistiken für Mitglied: ",
   "err_guildOnly": "Ich kann diesen Befehl nicht in den Privaten Nachrichten ausführen!",
   "err_adminOnly": "Du hast keine Rechte um diesen Befehl auszuführen!",
-  "err_noArg": "Du hast nicht die richtige anzahl an Parametern übergeben, ",
+  "err_noArg": "Du hast nicht die richtige anzahl an Parametern übergeben.",
   "err_commandUsage": "Beispiel: ",
   "err_cmdTime": "Bitte warte noch %s Sekunden bevor du den Befehl: %s, nochmal ausführst!",
   "error": "--Error--",
