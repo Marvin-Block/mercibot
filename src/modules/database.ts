@@ -1,4 +1,4 @@
-import {createConnection, createConnections} from 'typeorm';
+import {createConnection} from 'typeorm';
 
 export async function init() {
     createConnection();

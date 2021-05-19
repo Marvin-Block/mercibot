@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class LevelRole {
+export class CustomConfig {
   @PrimaryGeneratedColumn()
   id: number;
 

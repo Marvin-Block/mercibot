@@ -1,19 +1,18 @@
 import 'reflect-metadata';
 import { AdminRole } from '../entity/AdminRole';
-import { getConnection } from "typeorm";
+import {  getRepository } from "typeorm";
 
 
 export function getRoles() {
   return new Promise((resolve, reject) => {
-    const adminRoles = getConnection().manager.find(AdminRole);
-    resolve(adminRoles);
+    resolve(getRepository(AdminRole).find())
   });
 }
 
-export function setRole(roleId: string, discordId: string) {
+export function addRole(discordId: string, roleId: string) {
   // a
 }
 
-export function setRoleBulk(roleId: string, discordId: string[]) {
+export function addRoleBulk(discordId: string, roleId: string[]) {
   // a
 }

@@ -8,19 +8,17 @@ import * as fs from 'fs';
 // create Collection for command cooldown
 const cooldowns = new discord.Collection();
 
-export function init(client: any) {
+export async function init(client: any) {
   // create collection for commands
   client.commands = new discord.Collection();
 
   // read commands from directory
   const commandFiles = fs.readdirSync('./src/commands').filter((file) => file.endsWith('.ts'));
-
   // iterate files and add to collection
   for (const file of commandFiles) {
-    import(`../commands/${file}`).then(command => {
-      client.commands.set(command.name, command);
-      console.log('Imported command: ' + command.name);
-    });
+    const command = await import(`../commands/${file}`)
+    client.commands.set(command.name, command);
+    console.log('Imported command: ' + command.name);
   }
 }
 
