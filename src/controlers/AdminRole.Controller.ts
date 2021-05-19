@@ -10,9 +10,16 @@ export function getRoles() {
 }
 
 export function addRole(discordId: string, roleId: string) {
-  // a
+  return new Promise((resolve, reject) => {
+    const role = new AdminRole();
+    role.discordId = discordId;
+    role.roleId = roleId;
+    resolve(getRepository(AdminRole).save(role).catch((error:any) => {return error.stack}));
+  });
 }
 
-export function addRoleBulk(discordId: string, roleId: string[]) {
-  // a
+export function deleteRole(roleId: string) {
+  return new Promise((resolve, reject) => {
+    resolve(getRepository(AdminRole).delete({roleId: roleId}))
+  });
 }
