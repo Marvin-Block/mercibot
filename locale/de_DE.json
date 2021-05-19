@@ -30,7 +30,7 @@
   "err_adminOnly": "Du hast keine Rechte um diesen Befehl auszuführen!",
   "err_noArg": "Du hast nicht die richtige anzahl an Parametern übergeben.",
   "err_commandUsage": "Beispiel: ",
-  "err_cmdTime": "Bitte warte noch %s Sekunden bevor du den Befehl: %s, nochmal ausführst!",
+  "err_cmdTime": "Bitte warte noch %s Sekunde(n) bevor du den Befehl: `%s` nochmal ausführst!",
   "error": "--Error--",
   "created_at": "Erstellt am",
   "name": "Name",
