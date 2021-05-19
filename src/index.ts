@@ -1,29 +1,30 @@
-import "reflect-metadata";
-import {createConnection} from "typeorm";
-import {User} from "./entity/User";
-import {Photo} from "./entity/Photo";
-import {PhotoMetadata} from "./entity/PhotoMetadata";
+import 'reflect-metadata';
+import { createConnection } from 'typeorm';
+import { User } from './entity/User';
+import { Photo } from './entity/Photo';
+import { PhotoMetadata } from './entity/PhotoMetadata';
+import * as _ from 'lodash';
 
-createConnection().then(async connection => {
-
-    //https://typeorm.io/#/
+createConnection()
+  .then(async (connection) => {
+    // https://typeorm.io/#/
 
     /**
      * saving entries using repository
      */
 
-    console.log("Inserting a new user into the database...");
+    console.log('Inserting a new user into the database...');
     const user = new User();
-    user.firstName = "Timber";
-    user.lastName = "Saw";
+    user.firstName = 'Timber';
+    user.lastName = 'Saw';
     user.age = 25;
     const userRepository = connection.getRepository(User);
     await userRepository.save(user);
-    console.log("Saved a new user with id: " + user.id);
+    console.log('Saved a new user with id: ' + user.id);
 
-    console.log("Loading users from the database...");
+    console.log('Loading users from the database...');
     const users = await userRepository.find();
-    console.log("Loaded users: ", users);
+    console.log('Loaded users: ', users);
 
     // let photo = new Photo();
     // const photoRepository = await connection.getRepository(Photo);
@@ -37,10 +38,9 @@ createConnection().then(async connection => {
     //     console.log("Photo has been saved. Photo id is", photo.id);
     // });
 
-
     /**
      * querying entries
-    */
+     */
     // let _allPhotos = await photoRepository.find();
     // console.log("All photos from the db: ", _allPhotos);
 
@@ -74,24 +74,24 @@ createConnection().then(async connection => {
     // await photoRepository.remove(photoToRemove);
 
     // create a photo
-    let photo = new Photo();
-    photo.name = "Me and Bears";
-    photo.description = "I am near polar bears";
-    photo.filename = "photo-with-bears.jpg";
+    const photo = new Photo();
+    photo.name = 'Me and Bears';
+    photo.description = 'I am near polar bears';
+    photo.filename = 'photo-with-bears.jpg';
     photo.isPublished = true;
 
     // create a photo metadata
-    let metadata = new PhotoMetadata();
+    const metadata = new PhotoMetadata();
     metadata.height = 640;
     metadata.width = 480;
     metadata.compressed = true;
-    metadata.comment = "cybershoot";
-    metadata.orientation = "portrait";
+    metadata.comment = 'cybershoot';
+    metadata.orientation = 'portrait';
     metadata.photo = photo; // this way we connect them
 
     // get entity repositories
-    let photoRepository = connection.getRepository(Photo);
-    let metadataRepository = connection.getRepository(PhotoMetadata);
+    const photoRepository = connection.getRepository(Photo);
+    const metadataRepository = connection.getRepository(PhotoMetadata);
 
     // first we should save a photo
     await photoRepository.save(photo);
@@ -100,9 +100,11 @@ createConnection().then(async connection => {
     await metadataRepository.save(metadata);
 
     // done
-    console.log("Metadata is saved, and relation between metadata and photo is created in the database too");
-    
-    let photos = await photoRepository.find({relations:["metdata"]})
-    console.table(photos)
+    console.log(
+      'Metadata is saved, and relation between metadata and photo is created in the database too'
+    );
 
-}).catch(error => console.log(error));
+    const photos = await photoRepository.find({ relations: ['metdata'] });
+    console.table(photos);
+  })
+  .catch((error) => console.log(error));

@@ -1,29 +1,28 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from "typeorm";
-import { PhotoMetadata } from "./PhotoMetadata";
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
+import { PhotoMetadata } from './PhotoMetadata';
 
 @Entity()
 export class Photo {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @Column({
+    length: 100
+  })
+  name: string;
 
-    @Column({
-        length: 100
-    })
-    name: string;
+  @Column('text')
+  description: string;
 
-    @Column("text")
-    description: string;
+  @Column()
+  filename: string;
 
-    @Column()
-    filename: string;
+  @Column('double')
+  views: number;
 
-    @Column("double")
-    views: number;
+  @Column()
+  isPublished: boolean;
 
-    @Column()
-    isPublished: boolean;
-
-    @OneToOne(type => PhotoMetadata, photoMetadata => photoMetadata.photo)
-    metadata: PhotoMetadata;
+  @OneToOne((type) => PhotoMetadata, (photoMetadata) => photoMetadata.photo)
+  metadata: PhotoMetadata;
 }
