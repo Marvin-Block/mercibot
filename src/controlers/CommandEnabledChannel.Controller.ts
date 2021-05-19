@@ -1,14 +1,11 @@
 import 'reflect-metadata';
-import { createConnection } from 'typeorm';
 import { CommandEnabledChannel } from '../entity/CommandEnabledChannel';
+import { getConnection } from "typeorm";
 
 export function getChannels() {
   return new Promise((resolve, reject) => {
-    createConnection().then(async (connection) => {
-      const commandEnabledChannelRepository = connection.getRepository(CommandEnabledChannel);
-      const channels = await commandEnabledChannelRepository.find();
-      resolve(channels);
-    });
+    const channels = getConnection().manager.find(CommandEnabledChannel);
+    resolve(channels);
   });
 }
 
