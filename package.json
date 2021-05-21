@@ -11,12 +11,14 @@
     "test": "ts-node src/test.ts"
   },
   "dependencies": {
+    "discord-paginationembed": "^2.1.0",
     "discord.js": "^12.5.3",
     "fs": "^0.0.1-security",
     "get-json": "^1.0.1",
     "jquery": "^3.6.0",
     "jquery-migrate": "^3.3.2",
     "lodash": "^4.17.21",
+    "moment": "^2.29.1",
     "mysql2": "^2.2.5",
     "node-html-to-image": "^3.1.0",
     "puppeteer": "^3.0.0",

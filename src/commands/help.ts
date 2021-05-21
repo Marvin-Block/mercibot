@@ -1,3 +1,4 @@
+import * as paginationEmbed from 'discord-paginationembed';
 import * as config from '../../config.json';
 export const name:string = 'help'
 export const description:string = 'Übersicht der Befehle';
@@ -10,9 +11,10 @@ export const cooldown:number = 5;
 export function execute(message:any, args: any[]){
     // todo: add translation
     // todo: add embed
+    // todo add pagination embed
     const data:any[any] = [];
     const { commands } = message.client;
-    if(!args){
+    if(args[0] === 'list'){
         data.push('Liste mit Befehlen: ');
         data.push(commands.map((command:any) => command.name).join(', '));
         data.push(`\n mach das für mehr infos -> \`${config.discord.prefix}help commandName\` über andere Befehle`);
