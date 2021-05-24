@@ -4,17 +4,29 @@ import {  getRepository } from "typeorm";
 
 
 export function getRoles() {
-  return new Promise((resolve, reject) => {
-    resolve(getRepository(AdminRole).find())
+  return new Promise((resolve) => {
+    resolve(getRepository(AdminRole).find({select:['roleId']}))
+  });
+}
+
+export function getRole(roleId:string){
+  return new Promise((resolve) => {
+    resolve(getRepository(AdminRole).findOne({roleId:roleId}))
   });
 }
 
 export function addRole(discordId: string, roleId: string) {
-  return new Promise((resolve, reject) => {
+  return new Promise( async (resolve, reject) => {
     const role = new AdminRole();
     role.discordId = discordId;
     role.roleId = roleId;
-    resolve(getRepository(AdminRole).save(role).catch((error:any) => {return error.stack}));
+    const isKnown = await getRole(role.roleId);
+    if(!isKnown){
+      resolve(getRepository(AdminRole).save(role).catch((error:any) => {return error}));
+    }
+    else {
+      reject('Role `' + role.roleId + '` is already an admin role')
+    }
   });
 }
 
