@@ -1,20 +1,11 @@
-import {
-  Entity,
-  PrimaryColumn,
-  Column,
-  ManyToMany,
-  CreateDateColumn,
-  UpdateDateColumn,
-  OneToMany,
-  OneToOne
-} from 'typeorm';
+import { Entity, PrimaryColumn, Column, ManyToMany, CreateDateColumn, UpdateDateColumn, OneToMany, OneToOne } from 'typeorm';
 import { Event } from './Event';
 
 @Entity()
 export class User {
   @PrimaryColumn({
     length: 18,
-    unique:true
+    unique: true
   })
   discordId: string;
 
