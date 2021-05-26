@@ -1,10 +1,9 @@
-import * as AdminRoleController from '../controlers/AdminRole.Controller';
+import * as ModRoleController from '../controlers/ModRole.Controller';
 import * as _ from 'lodash';
 import * as discord from 'discord.js';
 import * as translator from '../modules/translator';
 import * as moment from 'moment';
-import { bulkAddRole } from '../controlers/AdminRole.Controller';
-export const name: string = 'adminrole';
+export const name: string = 'modrole';
 export const description: string = '';
 export const aliases: string[] = [''];
 export const usage: string[] = ['(<add> <list> <remove>) <@role>'];
@@ -22,32 +21,32 @@ export async function execute(message: any, args: any[]) {
     });
     if (roleIds.length === 1) {
       // single insert
-      AdminRoleController.addRole(message.author.id, roleIds[0])
+      ModRoleController.addRole(message.author.id, roleIds[0])
         .then((result) => {
           const roleInfo = message.guild.roles.resolve(roleIds[0]);
-          return message.channel.send(`Die Rolle "${roleInfo.name}" mit der ID: ${roleInfo.id} wurde als Adminrolle hinzugefügt.`);
+          return message.channel.send(`Die Rolle "${roleInfo.name}" mit der ID: ${roleInfo.id} wurde als Modrolle hinzugefügt.`);
         })
         .catch((reason) => {
           return message.channel.send(reason);
         });
     } else if (roleIds.length > 1) {
-      AdminRoleController.bulkAddRole(message.author.id, roleIds)
+      ModRoleController.bulkAddRole(message.author.id, roleIds)
       return message.channel.send('Die Rollen wurden eingefügt.');
     } else {
       return message.channel.send('Dude, where the roles at ????');
     }
   }
   if (args[0] === 'list') {
-    const databaseRoles: any[any] = await AdminRoleController.getRoles();
-    const adminRoles = databaseRoles.map((a: any) => a.roleId);
+    const databaseRoles: any[any] = await ModRoleController.getRoles();
+    const modRoles = databaseRoles.map((a: any) => a.roleId);
     const discordRoles = await message.guild.roles.cache.filter((role: any) => {
-      return adminRoles.includes(role.id);
+      return modRoles.includes(role.id);
     });
     const textArr = await discordRoles.map((role: any) => `${role.id} - <@&${role.id}>`);
 
     const embed = new discord.MessageEmbed()
       .setColor(0x42aaf4)
-      .setTitle(':small_orange_diamond: Adminroles :small_orange_diamond:') // todo: add translation
+      .setTitle(':small_orange_diamond: Modroles :small_orange_diamond:') // todo: add translation
       .setTimestamp()
       .setThumbnail(message.guild.iconURL())
       .setDescription(textArr.join('\n'));
@@ -61,18 +60,18 @@ export async function execute(message: any, args: any[]) {
     });
     if (roleIds.length === 1) {
       // single insert
-      AdminRoleController.deleteRole(roleIds[0])
+      ModRoleController.deleteRole(roleIds[0])
         .then((result: any) => {
           if (result.affected > 0) {
             const roleInfo = message.guild.roles.resolve(roleIds[0]);
-            return message.channel.send(`Die Rolle "${roleInfo.name}" mit der ID: ${roleInfo.id} wurde als Adminrolle entfernt.`);
-          } else return message.channel.send(':x: Not an AdminRole.');
+            return message.channel.send(`Die Rolle "${roleInfo.name}" mit der ID: ${roleInfo.id} wurde als Mod rolle entfernt.`);
+          } else return message.channel.send(':x: Not a Mod role.');
         })
         .catch((reason) => {
           return message.channel.send(reason);
         });
     } else if (roleIds.length > 1) {
-      AdminRoleController.bulkDeleteRole(roleIds)
+      ModRoleController.bulkDeleteRole(roleIds)
       return message.channel.send('Die Rollen wurden gelöscht.');
     } else {
       return message.channel.send('Dude, where the roles at ????');

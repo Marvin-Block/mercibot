@@ -1,18 +1,13 @@
 import 'reflect-metadata';
 import { CustomConfig } from '../entity/CustomConfig';
-import { getRepository } from "typeorm";
+import { getRepository } from 'typeorm';
 
-
-export function getConfig() {
-    return new Promise((resolve, reject) => {
-        resolve(getRepository(CustomConfig).find());
-    });
+export async function getConfig(key: string) {
+  return new Promise((resolve, reject) => {
+    resolve(getRepository(CustomConfig).findOne({key}));
+  });
 }
 
-export function addConfig(discordId: string, key:string, value:string, info:string) {
-    // a
-}
-
-export function addRoleBulk(discordId: string, key:string[], value:string[], info:string[]) {
-    // a
+export function addConfig(discordId: string, key: string, value: string, info: string) {
+  // a
 }

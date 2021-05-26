@@ -1,28 +1,28 @@
 import 'reflect-metadata';
-import { AdminRole } from '../entity/AdminRole';
+import { ModRole } from '../entity/ModRole';
 import { getRepository } from 'typeorm';
 
 export function getRoles() {
   return new Promise((resolve) => {
-    resolve(getRepository(AdminRole).find({ select: ['roleId'] }));
+    resolve(getRepository(ModRole).find({ select: ['roleId'] }));
   });
 }
 
 export function getRole(roleId: string) {
   return new Promise((resolve) => {
-    resolve(getRepository(AdminRole).findOne({ roleId }));
+    resolve(getRepository(ModRole).findOne({ roleId }));
   });
 }
 
 export function addRole(discordId: string, roleId: string) {
   return new Promise(async (resolve, reject) => {
-    const role = new AdminRole();
+    const role = new ModRole();
     role.discordId = discordId;
     role.roleId = roleId;
     const isKnown = await getRole(role.roleId);
     if (!isKnown) {
       resolve(
-        getRepository(AdminRole)
+        getRepository(ModRole)
           .save(role)
           .catch((error: any) => {
             return error;
@@ -36,14 +36,14 @@ export function addRole(discordId: string, roleId: string) {
 
 export function bulkAddRole(discordId: string, roleIds: string[]) {
   roleIds.forEach((roleId) => {
-    const role = new AdminRole();
+    const role = new ModRole();
     role.discordId = discordId;
     role.roleId = roleId;
-    getRepository(AdminRole)
+    getRepository(ModRole)
       .findOne({ roleId })
       .then((knownRole: any) => {
         if (!knownRole) {
-          getRepository(AdminRole)
+          getRepository(ModRole)
             .save(role)
             .catch((error: any) => {
               return error;
@@ -55,13 +55,13 @@ export function bulkAddRole(discordId: string, roleIds: string[]) {
 
 export function deleteRole(roleId: string) {
   return new Promise((resolve, reject) => {
-    resolve(getRepository(AdminRole).delete({ roleId }));
+    resolve(getRepository(ModRole).delete({ roleId }));
   });
 }
 
 export function bulkDeleteRole(roleIds: string[]) {
   // getRepository(AdminRole).delete({ roleId })
   roleIds.forEach((roleId) => {
-    getRepository(AdminRole).delete({ roleId })
+    getRepository(ModRole).delete({ roleId })
   });
 }

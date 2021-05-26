@@ -2,6 +2,7 @@ import * as discord from 'discord.js';
 import * as config from '../../config.json';
 import * as translator from './translator';
 import * as adminRole from '../controlers/AdminRole.Controller';
+import * as customConfig from '../controlers/CustomConfig.Controller';
 import * as commandEnabledChannel from '../controlers/CommandEnabledChannel.Controller';
 import * as fs from 'fs';
 
@@ -16,7 +17,7 @@ export async function init(client: any) {
   const commandFiles = fs.readdirSync('./src/commands').filter((file) => file.endsWith('.ts'));
   // iterate files and add to collection
   for (const file of commandFiles) {
-    const command = await import(`../commands/${file}`)
+    const command = await import(`../commands/${file}`);
     client.commands.set(command.name, command);
     console.log('Imported command: ' + command.name);
   }
@@ -51,16 +52,25 @@ export async function handle(message: any, client: any) {
     roles.push(entry.roleId);
   });
 
-  // check for permissions
-  if (
-    command.adminOnly &&
-    !roles
-      .map((role) => {
-        return message.member.roles.cache.has(role);
-      })
-      .includes(true)
-  ) {
-    return message.reply(translator.t('err_adminOnly'));
+  // get bot Owner from database
+  const botOwner: any = await customConfig.getConfig('botOwner');
+  const isBotOwner = botOwner.value === message.author.id;
+  const isOwner = message.guild.ownerID === message.author.id;
+
+  // check for permissions if server or bot owner, skip
+  if (!isOwner){
+    if(!isBotOwner){
+      if (
+        ((command.adminOnly && !isBotOwner) || (command.adminOnly && !isOwner)) &&
+        !roles
+          .map((role) => {
+            return message.member.roles.cache.has(role);
+          })
+          .includes(true)
+      ) {
+        return message.reply(translator.t('err_adminOnly'));
+      }
+    }
   }
 
   // get channels from database
