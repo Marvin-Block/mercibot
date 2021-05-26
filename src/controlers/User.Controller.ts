@@ -36,9 +36,9 @@ export function addXpUser(message: any, xp: number) {
       selectedUser.xp = nXp;
       selectedUser.level = xpHandler.getLvlForXP(selectedUser.xp);
       userRepo.save(selectedUser);
-      if (xpHandler.getLvlForXP(nXp) > xpHandler.getLvlForXP(selectedUser.xp)) {
-         message.channel.send('LvL up oder so.')
-      }
+      // if (xpHandler.getLvlForXP(nXp) > xpHandler.getLvlForXP(selectedUser.xp))
+      // message.channel.send('LvL up oder so.')
+
       // const lvl = utils.getLvlForXP(result[0].exp) != result[0].level ? utils.getLvlForXP(result[0].exp) : null;
       // if(lvl) {
       //   sql = 'UPDATE users SET level = ' + lvl + ' WHERE discord_id =' + userId;
@@ -57,6 +57,18 @@ export function addXpUser(message: any, xp: number) {
       //     });
       //   });
       // }
+    } else {
+      const user = new User();
+      user.discordId = message.author.id;
+      user.name = escape(message.author.username) + '#' + message.author.discriminator;
+      user.xp = 0;
+      user.level = 0;
+      const lvl = xpHandler.getLvlForXP(user.xp) !== user.level ? xpHandler.getLvlForXP(user.xp) : null;
+      const nXp = user.xp + xp;
+      const lvlUp = xpHandler.getLvlForXP(nXp) > xpHandler.getLvlForXP(user.xp);
+      user.xp = nXp;
+      user.level = xpHandler.getLvlForXP(user.xp);
+      userRepo.save(user);
     }
   });
 }

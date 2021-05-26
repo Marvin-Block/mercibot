@@ -5,6 +5,7 @@ import * as adminRole from '../controlers/AdminRole.Controller';
 import * as customConfig from '../controlers/CustomConfig.Controller';
 import * as commandEnabledChannel from '../controlers/CommandEnabledChannel.Controller';
 import * as fs from 'fs';
+import { channelRestricted } from "../commands/clear";
 
 // create Collection for command cooldown
 const cooldowns = new discord.Collection();
@@ -80,8 +81,8 @@ export async function handle(message: any, client: any) {
     channels.push(entry.channelId);
   });
 
-  // check for channels that have commands enabled
-  if (!channels.includes(message.channel.id)) return;
+  // if command is channel restricted, check channels
+  if(command.channelRestricted && !channels.includes(message.channel.id)) return;
 
   // check for arguments
   if (command.args && !args.length) {

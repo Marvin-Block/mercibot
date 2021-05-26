@@ -19,7 +19,7 @@ export function getLvlForXP(xp: number): number {
   return lvl;
 }
 
-export async function addXpMessage(message: any) {
+export function addXpMessage(message: any) {
   if (!cooldowns.has(message.author.id) || Date.now() > cooldowns.get(message.author.id)) {
     userController.addXpUser(message, Math.floor(Math.random() * (messageXPAmountMax - messageXPAmountMin + 1)) + messageXPAmountMin);
     cooldowns.set(message.author.id, Date.now() + messageXPCooldown * 1000);

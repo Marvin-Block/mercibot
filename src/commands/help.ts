@@ -15,7 +15,7 @@ export function execute(message: any, args: any[]) {
 
   const data: any[any] = [];
   const { commands } = message.client;
-  if (args.length === 0 ) {
+  if (args.length === 0) {
     data.push('Liste mit Befehlen: ');
     data.push(
       commands
@@ -37,7 +37,6 @@ export function execute(message: any, args: any[]) {
     //     console.error(`Ich konnte dem User  ${message.author.tag} keine help DM schicken.\n`, error);
     //     message.channel.send('Ich kann dir leider keine Privaten Nachrichten schicken überprüfe deine Einstellungen.');
     //   });
-
   } else {
     const commandName = args[0];
     const command = commands.get(commandName) || commands.find((c: any) => c.aliases && c.aliases.includes(commandName));

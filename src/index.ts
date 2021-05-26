@@ -7,7 +7,7 @@ import * as xpHandler from './modules/xpHandler';
 import * as userController from './controlers/User.Controller';
 
 const counterChannelId = '844283720663564328';
-const noXpChannels = ['844283671824433152'];
+const noXpChannels = ['844283720663564328'];
 
 const client = new discord.Client();
 translator.init();
