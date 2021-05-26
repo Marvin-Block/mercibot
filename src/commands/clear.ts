@@ -1,7 +1,7 @@
 export const name:string = 'clear'
 export const description:string = '';
 export const aliases:string[] = ['purge'];
-export const usage:string[] = ['@user amount', '@user', 'amount'];
+export const usage:string[] = ['@user amount | ~clear amount | ~clear @user'];
 export const args:boolean = true;
 export const guildOnly:boolean = true;
 export const adminOnly:boolean = true;
@@ -36,11 +36,11 @@ export function execute(message:any, args: any[]){
       });
     }
     else {
-      return message.reply('Anzahl zwischen 1 und 100!');
+      return message.channel.send('Anzahl zwischen 1 und 100!');
     }
   }
   else {
-    return message.reply('Bitte gültige Zahl angeben.');
+    return message.channel.send('Bitte gültige Zahl angeben.');
   }
-    
+
 }

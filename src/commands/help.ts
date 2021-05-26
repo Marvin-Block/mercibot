@@ -31,11 +31,11 @@ export function execute(message: any, args: any[]) {
     //   .send(data, { split: true })
     //   .then(() => {
     //     if (message.channel.type === 'dm') return;
-    //     message.reply('Ich habe dir eine DM mit allen Befehlen geschickt!');
+    //     message.channel.send('Ich habe dir eine DM mit allen Befehlen geschickt!');
     //   })
     //   .catch((error: any) => {
     //     console.error(`Ich konnte dem User  ${message.author.tag} keine help DM schicken.\n`, error);
-    //     message.reply('Ich kann dir leider keine Privaten Nachrichten schicken überprüfe deine Einstellungen.');
+    //     message.channel.send('Ich kann dir leider keine Privaten Nachrichten schicken überprüfe deine Einstellungen.');
     //   });
 
   } else {

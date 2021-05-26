@@ -40,7 +40,7 @@ export async function handle(message: any, client: any) {
 
   // check for guildOnly
   if (command.guildOnly && message.channel.type !== 'text') {
-    return message.reply(translator.t('err_guildOnly'));
+    return message.channel.send(translator.t('err_guildOnly'));
   }
 
   // get adminRoles from database
@@ -68,7 +68,7 @@ export async function handle(message: any, client: any) {
           })
           .includes(true)
       ) {
-        return message.reply(translator.t('err_adminOnly'));
+        return message.channel.send(translator.t('err_adminOnly'));
       }
     }
   }
@@ -108,7 +108,7 @@ export async function handle(message: any, client: any) {
     const expiration = timestamps.get(message.author.id) + cooldownAmount;
     if (now < expiration) {
       const timeLeft = (expiration - now) / 1000;
-      return message.reply(translator.t('err_cmdTime', timeLeft.toFixed(1), command.name));
+      return message.channel.send(translator.t('err_cmdTime', timeLeft.toFixed(1), command.name));
     }
   }
   // set cooldown and delete after time passed
@@ -119,6 +119,6 @@ export async function handle(message: any, client: any) {
     command.execute(message, args);
   } catch (error) {
     console.error(error);
-    message.reply(translator.t('error'));
+    message.channel.send(translator.t('error'));
   }
 }

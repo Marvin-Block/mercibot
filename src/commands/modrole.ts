@@ -1,12 +1,8 @@
 import * as ModRoleController from '../controlers/ModRole.Controller';
 import * as _ from 'lodash';
 import * as discord from 'discord.js';
-import * as translator from '../modules/translator';
-import * as moment from 'moment';
 export const name: string = 'modrole';
-export const description: string = '';
-export const aliases: string[] = [''];
-export const usage: string[] = ['(<add> <list> <remove>) <@role>'];
+export const usage: string[] = ['(<add> <list> <remove>) <roleId> <roleId> <roleId>'];
 export const args: boolean = true;
 export const guildOnly: boolean = true;
 export const adminOnly: boolean = true;
