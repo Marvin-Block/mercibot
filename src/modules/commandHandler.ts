@@ -5,7 +5,6 @@ import * as adminRole from '../controlers/AdminRole.Controller';
 import * as customConfig from '../controlers/CustomConfig.Controller';
 import * as commandEnabledChannel from '../controlers/CommandEnabledChannel.Controller';
 import * as fs from 'fs';
-import { channelRestricted } from "../commands/clear";
 
 // create Collection for command cooldown
 const cooldowns = new discord.Collection();
@@ -53,12 +52,9 @@ export async function handle(message: any, client: any) {
     roles.push(entry.roleId);
   });
 
-  // get bot Owner from database
-  const botOwner: any = await customConfig.getConfig('botOwner');
-  const isBotOwner = botOwner.value === message.author.id;
-  const isOwner = message.guild.ownerID === message.author.id;
-
   // check for permissions if server or bot owner, skip
+  const isBotOwner = config.discord.botOwner === message.author.id;
+  const isOwner = message.guild.ownerID === message.author.id;
   if (!isOwner){
     if(!isBotOwner){
       if (

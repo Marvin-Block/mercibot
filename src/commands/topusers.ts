@@ -17,9 +17,8 @@ export async function execute(message: any) {
   const dbUsers: any[any] = await getAmountUsers(10);
   const embed = new discord.MessageEmbed()
     .setColor(0x42aaf4)
-    .setTitle(':small_orange_diamond: Top 10 :small_orange_diamond:')
-    .setThumbnail(message.guild.iconURL({dynamic:true}))
-    .setDescription('') // todo: add description
+    .setTitle('Top 10 User Ranking')
+    .setDescription('add descriptive description') // todo: add description
     .setTimestamp();
 
   const discordUsers: Collection<any, any> = await message.guild.members.fetch({ user: dbUsers.map((user: any) => user.discordId) });
@@ -29,7 +28,8 @@ export async function execute(message: any) {
         username: discordUsers.get(entry.discordId).displayName,
         xp: entry.xp,
         rank: index + 1,
-        url: discordUsers.get(entry.discordId).user.displayAvatarURL({ dynamic: true })
+        level: entry.level,
+        url: discordUsers.get(entry.discordId).user.displayAvatarURL()
       });
   });
   customImages.sendTop10(embed, users, message.channel);
