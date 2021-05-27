@@ -3,9 +3,9 @@ import * as config from '../../config.json';
 import * as translator from './translator';
 import * as userController from '../controlers/User.Controller';
 
-const messageXPAmountMax = 20; // orig val 20
-const messageXPAmountMin = 10; // orig val 10
-const messageXPCooldown = 0; // orig val 60
+export const messageXPAmountMax = 20; // orig val 20
+export const messageXPAmountMin = 10; // orig val 10
+export const messageXPCooldown = 0; // orig val 60
 
 export function getXPForLevel(level: number): number {
   return Math.pow(level + 5, 2) * 20;

@@ -65,7 +65,7 @@ export function sendTop10(message: any, users: any[], channel: any) {
       },
       output: './resources/temp/Top10.png',
       html: data.toString(),
-      type: 'png',
+      type: 'gif',
       transparent: true,
       content: {
         users
