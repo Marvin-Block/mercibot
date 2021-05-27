@@ -16,8 +16,9 @@ function checkCooldown(id: string) {
 
 export async function sendWelcome(guildMember: GuildMember) {
   if (!checkCooldown(guildMember.id)) return;
-  const dbWelcomeChannel: any = await getConfig('welcomeChannel');
-  const welcomeChannel: any = await guildMember.guild.channels.cache.get(dbWelcomeChannel.value);
+  // const dbWelcomeChannel: any = await getConfig('welcomeChannel');
+  // const welcomeChannel: any = await guildMember.guild.channels.cache.get(dbWelcomeChannel.value);
+  const welcomeChannel: any = await guildMember.guild.channels.cache.get('844283720663564328');
   const image: any = fs.readFileSync('./resources/images/star.png');
   // @ts-ignore
   const base64Image = new Buffer.from(image).toString('base64');
