@@ -1,0 +1,82 @@
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+    <style>
+        html {
+            background-color: transparent;
+            text-shadow: 2px 0 0 black,
+            2px 0 0 black,
+            1px 0 0 black;
+            overflow: hidden;
+        }
+        body {
+            width: 720px;
+            height: 770px;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .tab {
+            padding-left: 2rem;
+            padding-right: 2rem;
+            width: 90%;
+            border-radius: 10px;
+            background-color: #494C52;
+            margin-top: 0.5rem;
+            height: 4.3rem;
+            display: flex;
+            font-family: 'Alata', sans-serif;
+            color:white;
+            font-size:1.8rem;
+            justify-content: space-between;
+            line-height: 4.3rem;
+        }
+        .leftTab{
+            display: flex;
+        }
+        .rank {
+            padding-right: 2rem;
+        }
+        .username{
+            text-wrap: none;
+            text-overflow: clip;
+            max-width: 25rem;
+        }
+        .xp{
+            text-wrap: none;
+            font-weight: lighter;
+            font-size: 1.8rem;
+            right: 0;
+        }
+        .l-1{
+            color:goldenrod;
+        }
+        .l-2{
+            color:silver;
+        }
+        .l-3{
+            color:saddlebrown;
+        }
+        .userimage{
+            margin-right: 1rem;
+            border-radius: 50px;
+            height: 4rem;
+            width: 4rem;
+        }
+    </style>
+</head>
+<body>
+{{#each users}}
+    <div class="tab">
+        <div class="leftTab">
+            <div class="rank l-{{this.rank}}">#{{this.rank}}</div>
+            <img class="userimage" src="{{this.url}}">
+            <div class="username">{{this.username}}</div>
+        </div>
+        <span class="xp">XP: {{this.xp}}</span>
+    </div>
+{{/each}}
+</body>
+</html>

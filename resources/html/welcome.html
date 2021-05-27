@@ -1,0 +1,80 @@
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+    <style>
+        html {
+            background-color: transparent;
+            text-shadow: 3px 0 0 black,
+            2px 0 0 black,
+            1px 0 0 black;
+        }
+        body {
+            width: 720px;
+            height: 180px;
+            background-color: transparent;
+            display: flex;
+        }
+        .pill{
+            margin: auto;
+            border-radius: 100px;
+            border:1px solid #222326;
+            width:688px;
+            height:155px;
+            display:flex;
+            background-color: #28313b;
+            background-position:10% 82%;
+        }
+        .title{
+            font-family: 'Alata', sans-serif;
+            color:whitesmoke;
+            font-size:2.7rem;
+            width:100%;
+            letter-spacing:0.05em;
+            border-bottom: 2px solid white;
+        }.star{
+             width:95px;
+             height:96px;
+             position:absolute;
+             left: 626px;
+             top: 80px;
+         }
+        .username{
+            font-family: 'Roboto', sans-serif;
+            font-style: italic;
+            font-weight:400;
+            color:white;
+            font-size:2rem;
+            width:100%;
+            padding-top:0.5rem;
+            letter-spacing:0.05em;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height:80px;
+        }
+        .userimage{
+            height:155px;
+            width: 155px;
+            border-radius: 100px;
+        }
+        .text{
+            padding-left:2rem;
+            width:400px;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+<div class="pill">
+    <img class="userimage" src="{{userImage}}">
+    </img>
+    <div class="text">
+        <div class="title">{{welcome}}</div>
+        <div class="username">{{name}}</div>
+    </div>
+    <img class="star" src="{{star}}">
+</div>
+</body>
+</html>

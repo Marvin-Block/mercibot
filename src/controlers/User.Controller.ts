@@ -11,6 +11,20 @@ async function insertOrIgnore(entity: any, values: any) {
   return await getConnection().manager.query(nsql, args);
 }
 
+export function getUser(discordId: string) {
+  return new Promise((resolve, reject) => {
+    resolve(getRepository(User).findOne({ discordId }));
+  });
+}
+
+export function getAmountUsers(amount: number) {
+  return new Promise((resolve, reject) => {
+    getRepository(User).createQueryBuilder('user').orderBy('user.xp', 'DESC').take(amount).getMany().then((users) => {
+      resolve(users)
+    });
+  });
+}
+
 export function getUsers() {
   return new Promise((resolve, reject) => {
     resolve(getRepository(User).find());
@@ -21,7 +35,7 @@ export function addUser(guildMember: any) {
   return new Promise((resolve) => {
     const user = new User();
     user.discordId = guildMember.id;
-    user.name = escape(guildMember.user.tag);
+    user.name = escape(guildMember.user.username) + '#' + guildMember.user.discriminator;
     return resolve(getRepository(User).save(user));
   });
 }
@@ -35,6 +49,7 @@ export function addXpUser(message: any, xp: number) {
       const lvlUp = xpHandler.getLvlForXP(nXp) > xpHandler.getLvlForXP(selectedUser.xp);
       selectedUser.xp = nXp;
       selectedUser.level = xpHandler.getLvlForXP(selectedUser.xp);
+      selectedUser.name = escape(message.author.username) + '#' + message.author.discriminator;
       userRepo.save(selectedUser);
       // if (xpHandler.getLvlForXP(nXp) > xpHandler.getLvlForXP(selectedUser.xp))
       // message.channel.send('LvL up oder so.')

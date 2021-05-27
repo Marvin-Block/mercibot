@@ -1,0 +1,120 @@
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+    <style>
+        html {
+            background-color: transparent;
+        }
+        body {
+            width: 600px;
+            height: 130px;
+            background-color: transparent;
+            display: flex;
+        }
+        .pill{
+            border:1px solid #222326;
+            margin: auto;
+            border-radius: 30px;
+            background-color: #7f5a83;
+            background-image: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%);
+            width:500px;
+            padding-right: 2rem;
+            height:106px;
+            padding-left: 10px;
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .title{
+            font-family: 'Alata', sans-serif;
+            color:white;
+            font-size:2rem;
+            width:100%;
+            letter-spacing:0.05em;
+            text-align: center;
+        }
+        .username{
+            font-family: 'Roboto', sans-serif;
+            font-style: italic;
+            font-weight:400;
+            color:white;
+            font-size:1rem;
+            padding-left: 1rem;
+            letter-spacing:0.05em;
+
+            display: flex;
+            text-overflow: clip;
+            overflow: hidden;
+            width: 100%;
+            height: 50px;
+        }
+        .userimage{
+            height:90px;
+            width: 90px;
+            background-color:transparent;
+            border-radius: 20px;
+        }
+        .text{
+            width:250px;
+            display: flex;
+        }
+        .lvl{
+            margin-left:-60px;
+            width: 50px;
+            height: 50px;
+            font-family: 'Roboto', sans-serif;
+            font-weight:bold;
+            color:whitesmoke;
+            font-size:1.5rem;
+            border-radius: 10px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .lvl-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .arrow{
+            font-size: 2rem;
+            padding-left: 1rem;
+            padding-right: 0.5rem;
+            color:whitesmoke;
+        }
+        .titlename{
+            display: flex;
+            flex-direction: column;
+            justify-items: left;
+            width: 100%;
+            max-height: 90px;
+        }
+    </style>
+</head>
+<body>
+<div class="pill">
+    <div class="text">
+    <img class="userimage" src="{{userImage}}"/>
+        <div class="titlename">
+        <div class="title">{{lvlup}}</div>
+            <div class="username">{{name}}</div>
+        </div>
+    </div>
+    <div class="lvl-container">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="70" height="72" viewbox="0 -2 43.30127018922193 54" style="filter: drop-shadow(0 0 0.15rem rgba(255, 255, 255, 0.4));">
+            <path fill="none" stroke="white" stroke-linecap="square" stroke-width="5px" d="M21.650635094610966 0L43.30127018922193 12.5L43.30127018922193 37.5L21.650635094610966 50L0 37.5L0 12.5Z"></path>
+            <span class="lvl">{{prevLvl}}</span>
+        </svg>
+        <span class="arrow">&#8594;</span>
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="70" height="72" viewbox="0 -2 43.30127018922193 54" style="filter: drop-shadow(0 0 0.15rem rgba(255, 255, 255, 0.4));">
+            <path fill="none" stroke="white" stroke-linecap="square" stroke-width="5px" d="M21.650635094610966 0L43.30127018922193 12.5L43.30127018922193 37.5L21.650635094610966 50L0 37.5L0 12.5Z"></path>
+            <span class="lvl">{{lvl}}</span>
+        </svg>
+    </div>
+
+
+</div>
+</body>
+</html>

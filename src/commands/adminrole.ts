@@ -1,9 +1,6 @@
 import * as AdminRoleController from '../controlers/AdminRole.Controller';
 import * as _ from 'lodash';
 import * as discord from 'discord.js';
-import * as translator from '../modules/translator';
-import * as moment from 'moment';
-import { bulkAddRole } from '../controlers/AdminRole.Controller';
 export const name: string = 'adminrole';
 export const usage: string[] = ['(<add> <list> <remove>) <roleId> <roleId> <roleId>'];
 export const args: boolean = true;
