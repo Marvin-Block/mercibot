@@ -9,7 +9,7 @@ export class User {
   })
   discordId: string;
 
-  @Column({ length: 32 })
+  @Column({ length: 255 })
   name: string;
 
   @Column({ default: null })
