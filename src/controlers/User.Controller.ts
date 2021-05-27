@@ -1,8 +1,10 @@
 import 'reflect-metadata';
 import { User } from '../entity/User';
-import { getRepository, getConnection, createQueryBuilder } from 'typeorm';
+import { getRepository, getConnection } from 'typeorm';
 import * as xpHandler from '../modules/xpHandler';
+import { sendLevelUp } from '../modules/customImages';
 import * as _ from 'lodash';
+import { Message } from 'discord.js';
 
 async function insertOrIgnore(entity: any, values: any) {
   const q: any = await getConnection().createQueryBuilder().insert().into(entity).values(values);
@@ -19,9 +21,14 @@ export function getUser(discordId: string) {
 
 export function getAmountUsers(amount: number) {
   return new Promise((resolve, reject) => {
-    getRepository(User).createQueryBuilder('user').orderBy('user.xp', 'DESC').take(amount).getMany().then((users) => {
-      resolve(users)
-    });
+    getRepository(User)
+      .createQueryBuilder('user')
+      .orderBy('user.xp', 'DESC')
+      .take(amount)
+      .getMany()
+      .then((users) => {
+        resolve(users);
+      });
   });
 }
 
@@ -40,7 +47,7 @@ export function addUser(guildMember: any) {
   });
 }
 
-export function addXpUser(message: any, xp: number) {
+export function addXpUser(message: Message, xp: number) {
   const userRepo = getRepository(User);
   userRepo.findOne({ discordId: message.author.id }).then((selectedUser: any) => {
     if (selectedUser) {
@@ -51,27 +58,8 @@ export function addXpUser(message: any, xp: number) {
       selectedUser.level = xpHandler.getLvlForXP(selectedUser.xp);
       selectedUser.name = escape(message.author.username) + '#' + message.author.discriminator;
       userRepo.save(selectedUser);
-      // if (xpHandler.getLvlForXP(nXp) > xpHandler.getLvlForXP(selectedUser.xp))
-      // message.channel.send('LvL up oder so.')
-
-      // const lvl = utils.getLvlForXP(result[0].exp) != result[0].level ? utils.getLvlForXP(result[0].exp) : null;
-      // if(lvl) {
-      //   sql = 'UPDATE users SET level = ' + lvl + ' WHERE discord_id =' + userId;
-      //   Database.connection.query(sql, function(err) {
-      //     if (err) throw err;
-      //     customImages.sendLvlUp(message, lvl);
-      //     sql = 'SELECT required_lvl,rank_id FROM ranks WHERE required_lvl<' + lvl + ' ORDER BY required_lvl desc';
-      //     Database.connection.query(sql, function(err, results) {
-      //       if (err) throw err;
-      //       const roles = message.member.roles;
-      //       for(let i = results.length - 1;i >= 0;i--) {
-      //         const role = roles.cache.find(e => e.id === results[i].rank_id);
-      //         if(role) {roles.remove(role);}
-      //       }
-      //       if(results.length > 0) {message.member.roles.add(results[0].rank_id.toString()).catch(console.error);}
-      //     });
-      //   });
-      // }
+      if (lvlUp) sendLevelUp(message, xpHandler.getLvlForXP(nXp));
+      // todo: give role based on level
     } else {
       const user = new User();
       user.discordId = message.author.id;
@@ -84,6 +72,8 @@ export function addXpUser(message: any, xp: number) {
       user.xp = nXp;
       user.level = xpHandler.getLvlForXP(user.xp);
       userRepo.save(user);
+      if (lvlUp) sendLevelUp(message, xpHandler.getLvlForXP(nXp));
+      // todo: give role based on level
     }
   });
 }
