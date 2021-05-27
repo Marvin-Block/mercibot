@@ -14,7 +14,7 @@ export const adminOnly: boolean = false;
 export const channelRestricted: boolean = false;
 export const cooldown: number = 5;
 export async function execute(message: any) {
-  const member = message.mentions.members.size > 1 ? message.mentions.members.first() : message.member;
+  const member = message.mentions.members.size > 0 ? message.mentions.members.first() : message.member;
   const dbUser: any = await userController.getUser(member.id);
   const messagesSent = Math.floor((dbUser.xp / xpHandler.messageXPAmountMax + dbUser.xp / xpHandler.messageXPAmountMin) / 2);
   const options = { dateStyle: 'short' };
