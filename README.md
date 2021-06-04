@@ -90,4 +90,6 @@ Discord: Muffin#4222
     * Reload Commands
     * Alias System
     * Mercy / Random GIFs
+    * Reaction Roles
+    * Set Main Language (?)
     
