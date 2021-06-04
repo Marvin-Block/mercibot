@@ -57,3 +57,37 @@ execute(message) {
 
 #### Contact:
 Discord: Muffin#4222
+
+# To-Do:
+* ### Translation
+    * Finish translation for all commands
+    * add new locale (en_US / en_UK)
+* ### Custom Config
+    * add description field
+    * add dialog for server Owner to set up Bot
+* ### Help
+    * multi page embed
+* ### Custom Images
+    * fix image generation speed
+* ### Add
+    * Ban
+    * Kick
+    * Event
+    * Mute
+    * Warn
+    * Report
+    * Allowed Command Channles
+    * Allowed Xp Channels
+    * Event
+    * Level Roles
+    * Seperator Roles
+    * Bad Word Filter
+    * Top / Flop Emotes
+    * Emote Backup
+    * Birthdays
+    * Discord Booster Roles
+    * Reload Modules
+    * Reload Commands
+    * Alias System
+    * Mercy / Random GIFs
+    
