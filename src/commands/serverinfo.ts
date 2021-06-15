@@ -13,7 +13,9 @@ export const cooldown: number = 5;
 export function execute(message: any) {
   // add welcome channel in resolve
   // add translation
-  const channel = message.guild.channels.resolve('844283720663564328');
+  if(!message.client.customConfig.get('welcomeChannel')) return message.channel.send(`Please add 'welcomeChannel' to your custom config.\n||~customconfig add welcomeChannel DiscordChannelID 'Description here'||`);
+  const channel = message.guild.channels.resolve(message.client.customConfig.get('welcomeChannel').value);
+  if(!channel) return message.channel.send(`Please make sure that the value of 'welcomeChannel' in your custom config is correct.`)
   const today: any = new Date();
   channel.createInvite().then((invite: any) => {
     message.guild.members.fetch(message.author.id).then((guildMember: any) => {

@@ -1,4 +1,5 @@
 import * as customConfig from '../controlers/CustomConfig.Controller';
+import * as customConfigModule from '../modules/customConfig';
 import { DeleteResult } from "typeorm";
 export const name: string = 'customconfig';
 export const description: string = '';
@@ -16,6 +17,7 @@ export async function execute(message: any, args: any[]) {
   switch (args[0]) {
     case 'add':
       customConfig.addConfig(message.author.id, key, value, description).then(() => {
+        customConfigModule.loadConfig(message.client);
         message.channel.send(`Successfully added ${key}`);
       }).catch((err:any) => {
         message.channel.send(err);
@@ -24,6 +26,7 @@ export async function execute(message: any, args: any[]) {
     case 'update':
       if (!description) return message.channel.send('Please add a Description \n > ~customconfig update [key] [value] \'Description here\'');
       customConfig.updateConfig(message.author.id, key, value, description).then(() => {
+        customConfigModule.loadConfig(message.client);
         message.channel.send(`Successfully updated ${key}`);
       }).catch((err:any) => {
         message.channel.send(err);
@@ -37,6 +40,7 @@ export async function execute(message: any, args: any[]) {
     case 'delete':
       if(!key) return message.channel.send('Please add a Key \n > ~customconfig delete [key]')
       await customConfig.deleteConfig(key).then((item:DeleteResult) => {
+        customConfigModule.loadConfig(message.client);
         message.channel.send('Successfully deleted ' + key)
       }).catch((err:string) => {
         message.channel.send(err);

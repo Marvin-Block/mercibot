@@ -2,7 +2,7 @@ import chalk from 'chalk';
 import * as config from '../../config.json';
 import * as discord from 'discord.js';
 import * as customConfig from '../controlers/CustomConfig.Controller';
-import { DMChannel, Guild, GuildMember, Message} from "discord.js";
+import {Client, DMChannel, Guild, GuildMember, Message} from "discord.js";
 const mandatoryConfig = [
   {
     key: 'messageXPAmountMin',
@@ -37,8 +37,6 @@ const mandatoryConfig = [
 ];
 
 export async function init(client: any) {
-  client.customConfig = new discord.Collection();
-
   // get full config from database
   let configList: any[any] = await customConfig.getFullConfig();
 
@@ -48,8 +46,15 @@ export async function init(client: any) {
       customConfig.addConfig(config.discord.botOwner, custConfig.key, custConfig.value, custConfig.info);
     }
   })
+
+  await loadConfig(client);
+}
+
+export async function loadConfig(client: any) {
+  client.customConfig = new discord.Collection();
   // re-read config and add it to client
-  configList = await customConfig.getFullConfig();
+  const configList: any[any] = await customConfig.getFullConfig();
+  console.log(chalk.redBright('Loading custom config...'));
   configList.forEach((config:any) => {
     client.customConfig.set(config.key, config)
     console.log(`Loading: "${chalk.blueBright('Custom config - ' + config.key)}"`);
