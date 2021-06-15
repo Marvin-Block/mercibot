@@ -1,16 +1,17 @@
 import * as discord from 'discord.js';
 import * as config from '../config.json';
 import * as commandHandler from './modules/commandHandler';
-import * as customConfig from './controlers/CustomConfig.Controller';
+import * as customConfigController from './controlers/CustomConfig.Controller';
 import * as translator from './modules/translator';
 import * as database from './modules/database';
 import * as xpHandler from './modules/xpHandler';
+import * as customConfig from './modules/customConfig';
 import * as userController from './controlers/User.Controller';
 import { sendWelcome } from './modules/customImages';
 
 // let counterChannelId: any = null;
-const counterChannelId = '322659763643088897';
-const noXpChannels = ['844283720663564328'];
+const counterChannelId = '850489762099757116';
+const noXpChannels = ['850489762099757116'];
 
 const client = new discord.Client();
 translator.init();
@@ -19,6 +20,7 @@ database.init();
 
 client.once('ready', async () => {
   console.log('Ready!');
+  customConfig.init(client);
   // counterChannelId = await customConfig.getConfig('memberCounterChannel');
   if (counterChannelId) {
     const channel = client.guilds.cache.first().channels.cache.find((ch) => ch.id === counterChannelId);

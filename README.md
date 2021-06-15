@@ -12,7 +12,7 @@
 [comment]: <> ([Roadmap]&#40;&#41;)
 
 ## Commandhandler usage:
-```javascript
+```js
 name: 'help',// name of the command
 description: 'Übersicht aller Befehle oder zu Infos zu einem bestimmten Befehl.',// Short description for help command
 alisases: ['commands'], // aliases
@@ -69,6 +69,9 @@ Discord: Muffin#4222
     * multi page embed
 * ### Custom Images
     * fix image generation speed
+    * dont send shit in DMs
+* ### XP
+    * no xp in DMs
 * ### Add
     * Ban
     * Kick
@@ -92,4 +95,3 @@ Discord: Muffin#4222
     * Mercy / Random GIFs
     * Reaction Roles
     * Set Main Language (?)
-    

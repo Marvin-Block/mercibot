@@ -8,6 +8,12 @@ export async function getConfig(key: string) {
   });
 }
 
+export async function getFullConfig() {
+  return new Promise((resolve, reject) => {
+    resolve(getRepository(CustomConfig).find());
+  });
+}
+
 export function addConfig(discordId: string, key: string, value: string, info: string) {
   // a
 }
