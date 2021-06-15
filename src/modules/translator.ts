@@ -1,6 +1,7 @@
 import * as config from '../../config.json';
 import * as _ from 'lodash';
 import * as fs from 'fs';
+import chalk from "chalk";
 
 const locale: any = {};
 
@@ -9,7 +10,7 @@ export function init() {
   if (localeFiles.includes(config.locale + '.json')) {
     import(`../../locale/${config.locale}.json`).then( obj => {
       Object.assign(locale, obj)
-      console.log('Imported locale: ' + config.locale)
+      console.log(`Loading: "${chalk.blue('Locale ' + config.locale)}"`);
     });
   } else {
     console.error('specified locale file could not be found');

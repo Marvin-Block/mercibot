@@ -8,19 +8,21 @@ import * as xpHandler from './modules/xpHandler';
 import * as customConfig from './modules/customConfig';
 import * as userController from './controlers/User.Controller';
 import { sendWelcome } from './modules/customImages';
+import chalk from "chalk";
 
 // let counterChannelId: any = null;
 const counterChannelId = '850489762099757116';
 const noXpChannels = ['850489762099757116'];
 
 const client = new discord.Client();
-translator.init();
-commandHandler.init(client);
-database.init();
+translator.init()
+database.init().then(() => {
+  commandHandler.init(client);
+  customConfig.init(client);
+});
 
 client.once('ready', async () => {
-  console.log('Ready!');
-  customConfig.init(client);
+  console.log(chalk.greenBright('Ready!'));
   // counterChannelId = await customConfig.getConfig('memberCounterChannel');
   if (counterChannelId) {
     const channel = client.guilds.cache.first().channels.cache.find((ch) => ch.id === counterChannelId);

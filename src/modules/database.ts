@@ -1,7 +1,12 @@
-import {createConnection} from 'typeorm';
+import { createConnection, getRepository } from "typeorm";
+import chalk from "chalk";
+import { AdminRole } from "../entity/AdminRole";
 
 export async function init() {
-    createConnection().then((a) => {
-        console.log('Imported database')
+    return new Promise((resolve) => {
+        createConnection().then((a) => {
+            console.log(`Loading: "${chalk.blue('Database Connected!')}"`);
+            resolve()
+        });
     });
 }

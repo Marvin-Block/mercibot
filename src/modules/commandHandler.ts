@@ -5,6 +5,7 @@ import * as adminRole from '../controlers/AdminRole.Controller';
 import * as customConfig from '../controlers/CustomConfig.Controller';
 import * as commandEnabledChannel from '../controlers/CommandEnabledChannel.Controller';
 import * as fs from 'fs';
+import chalk from "chalk";
 
 // create Collection for command cooldown
 const cooldowns = new discord.Collection();
@@ -19,7 +20,7 @@ export async function init(client: any) {
   for (const file of commandFiles) {
     const command = await import(`../commands/${file}`);
     client.commands.set(command.name, command);
-    console.log('Imported command: ' + command.name);
+    console.log(`Loading: "${chalk.blue('Command - ' + command.name)}"`);
   }
 }
 

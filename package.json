@@ -12,6 +12,7 @@
     "test": "ts-node src/test.ts"
   },
   "dependencies": {
+    "chalk": "^2.4.2",
     "discord-paginationembed": "^2.1.0",
     "discord.js": "^12.5.3",
     "fs": "^0.0.1-security",
